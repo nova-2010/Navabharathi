@@ -6,30 +6,176 @@
 <title>The Rich Routine — Smart Money Tracker</title>
 <meta name="description" content="The Rich Routine personal finance tracker — track, plan, save, invest and build wealth.">
 <style>
-:root{--bg:#f5f4ef;--panel:#fff;--ink:#171a18;--muted:#747871;--line:#e3e5df;--green:#2f6b4f;--green2:#dfece3;--dark:#1c2420;--warn:#b56b20;--red:#a94843;--shadow:0 14px 40px rgba(25,35,29,.07);--r:18px}
-*{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--ink)}
-button,input,select{font:inherit}button{cursor:pointer}.app{display:flex;min-height:100vh}.side{width:250px;background:var(--dark);color:#eef3ef;padding:24px 16px;position:fixed;inset:0 auto 0 0;z-index:20}.brand{font-weight:800;letter-spacing:.08em;font-size:15px;padding:8px 10px 28px}.brand small{display:block;color:#9da9a1;font-weight:500;letter-spacing:0;margin-top:6px}.nav{display:grid;gap:4px}.nav button{border:0;background:transparent;color:#bac5be;text-align:left;padding:12px 13px;border-radius:11px}.nav button.active,.nav button:hover{background:#2a342f;color:#fff}.main{margin-left:250px;width:calc(100% - 250px);padding:28px 34px 60px}.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:25px}.title h1{font-size:28px;margin:0}.title p{margin:5px 0 0;color:var(--muted)}.actions{display:flex;gap:10px}.btn{border:1px solid var(--line);background:#fff;padding:10px 15px;border-radius:11px}.btn.primary{background:var(--green);color:#fff;border-color:var(--green)}.btn:hover{transform:translateY(-1px)}.grid{display:grid;gap:16px}.cards{grid-template-columns:repeat(6,minmax(0,1fr))}.card,.section{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow)}.card{padding:19px}.eyebrow{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}.metric{font-size:25px;font-weight:750;margin-top:8px}.delta{font-size:12px;margin-top:7px;color:var(--muted)}.section{padding:22px}.section h2{font-size:17px;margin:0 0 15px}.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}.filters{display:flex;gap:8px;flex-wrap:wrap}.filters select,.filters input{border:1px solid var(--line);background:#fff;border-radius:10px;padding:9px 11px}.periods button{border:1px solid var(--line);background:#fff;padding:8px 11px;border-radius:9px;color:var(--muted)}.periods button.active{background:var(--dark);color:#fff;border-color:var(--dark)}.chartwrap{height:310px;position:relative}.chartwrap canvas{width:100%;height:100%}.two{grid-template-columns:1.55fr 1fr}.three{grid-template-columns:repeat(3,1fr)}.table{width:100%;border-collapse:collapse}.table th,.table td{padding:12px 8px;border-bottom:1px solid var(--line);text-align:left;font-size:13px}.table th{font-size:11px;text-transform:uppercase;color:var(--muted);letter-spacing:.06em}.right{text-align:right!important}.pill{display:inline-flex;padding:5px 8px;border-radius:999px;font-size:11px;background:#eef1ed}.pill.green{background:var(--green2);color:var(--green)}.pill.red{background:#f7e6e4;color:var(--red)}.catbar{display:grid;grid-template-columns:120px 1fr 90px;gap:12px;align-items:center;margin:12px 0;font-size:13px}.bar{height:8px;background:#edf0eb;border-radius:99px;overflow:hidden}.bar i{display:block;height:100%;background:var(--green);border-radius:99px}.hero{background:var(--dark);color:#f3f6f2;padding:26px;border-radius:var(--r);display:flex;justify-content:space-between;gap:25px}.hero .big{font-size:40px;font-weight:800;line-height:1}.hero p{color:#b9c4bd;max-width:560px}.mini{display:flex;gap:10px;flex-wrap:wrap}.mini div{border:1px solid #38443e;padding:10px 12px;border-radius:11px;color:#d8e1db}.hidden{display:none}.mobile{display:none}
-.modal{position:fixed;inset:0;background:rgba(10,15,12,.48);display:none;align-items:center;justify-content:center;z-index:50}.modal.open{display:flex}.modalbox{background:#fff;border-radius:20px;width:min(560px,92vw);padding:24px}.form{display:grid;grid-template-columns:1fr 1fr;gap:12px}.form label{font-size:12px;color:var(--muted)}.form input,.form select{width:100%;margin-top:5px;border:1px solid var(--line);padding:10px;border-radius:10px}.form .full{grid-column:1/-1}.empty{padding:35px;text-align:center;color:var(--muted)}
-@media(max-width:1050px){.cards{grid-template-columns:repeat(3,1fr)}.two{grid-template-columns:1fr}}
-@media(max-width:760px){.side{width:72px;padding:18px 9px}.brand{font-size:0}.brand:after{content:"TRR";font-size:16px}.brand small,.nav span{display:none}.nav button{text-align:center}.main{margin-left:72px;width:calc(100% - 72px);padding:18px}.cards,.three{grid-template-columns:1fr 1fr}.top{align-items:flex-start}.actions .hide-sm{display:none}.hero{display:block}.hero .big{font-size:32px}.chartwrap{height:250px}.mobile{display:block}}
-@media(max-width:480px){.cards,.three{grid-template-columns:1fr}.main{padding:14px}.section{padding:16px}.catbar{grid-template-columns:95px 1fr 75px}.form{grid-template-columns:1fr}.form .full{grid-column:auto}}
+:root {
+  --bg: #f8fafc;
+  --panel: #ffffff;
+  --ink: #0f172a;
+  --muted: #64748b;
+  --line: #e2e8f0;
+  --line-strong: #cbd5e1;
+  --green: #059669;
+  --green-soft: #ecfdf5;
+  --warn: #d97706;
+  --warn-soft: #fffbeb;
+  --red: #e11d48;
+  --red-soft: #fff1f2;
+  --indigo: #4f46e5;
+  --indigo-soft: #eef2ff;
+  --dark: #0f172a;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.03);
+  --r: 14px;
+}
 
-.chart-legend{display:flex;gap:14px;flex-wrap:wrap;margin:0 0 10px;color:var(--muted);font-size:11px}
-.chart-legend span{display:inline-flex;align-items:center;gap:6px}
-.chart-dot{width:9px;height:9px;border-radius:3px;display:inline-block}
-.chart-note{font-size:11px;color:var(--muted);margin-top:8px}
-.goal-progress{height:12px;background:#edf0eb;border-radius:99px;overflow:hidden}
-.goal-progress i{display:block;height:100%;background:var(--green);border-radius:99px}
-.invest-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
-.invest-card{border:1px solid var(--line);border-radius:14px;padding:16px;background:#fafbf8}
-.invest-card .amount{font-size:21px;font-weight:750;margin-top:7px}
-@media(max-width:900px){.invest-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:520px){.invest-grid{grid-template-columns:1fr}}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", sans-serif; background: var(--bg); color: var(--ink); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+button, input, select { font: inherit; color: inherit; }
+button { cursor: pointer; transition: all 0.15s ease; }
 
-/* PREMIUM DARK SYSTEM */
-:root{--bg:#090e0b;--panel:#111812;--ink:#edf3ee;--muted:#8e9a92;--line:#27322b;--green:#8fbd98;--green2:#16351f;--dark:#060a08;--warn:#d6a95c;--red:#e27b73;--shadow:0 18px 55px rgba(0,0,0,.30)}
-body{background:var(--bg);color:var(--ink)}.side{background:#070c09;border-right:1px solid var(--line)}.main{background:radial-gradient(circle at 85% -10%,rgba(83,133,94,.11),transparent 32%),var(--bg)}.top{background:rgba(9,14,11,.90);border-color:var(--line)}.card,.section{background:linear-gradient(180deg,#141c17,#101611);border-color:var(--line);box-shadow:var(--shadow)}.btn,.filters input,.filters select,.form input,.form select{background:#151e18;color:var(--ink);border-color:var(--line)}.btn.primary{background:var(--green);color:#071009;border-color:var(--green)}.hero{background:linear-gradient(135deg,#121b15,#0b110d);border:1px solid var(--line)}.pill{background:#1a241e;color:#b7c4bb}.pill.green,.alarm.ok{background:#14321c;color:#91c69b}.pill.red,.alarm.over{background:#371b19;color:#ef9189}.alarm.watch{background:#352917;color:#e0b76a}.table th,.table td{border-color:var(--line)}.periods button{background:#141c17;color:#9aa59e;border-color:var(--line)}.periods button.active{background:#e1ebe4;color:#09100c;border-color:#e1ebe4}.bar,.util-meter,.goal-progress{background:#202a23}.bar i{background:var(--green)}.invest-card{background:#0f1511;border-color:var(--line)}.soft{background:#0f1511}.row-over{background:rgba(116,34,30,.17)}.row-watch{background:rgba(125,91,30,.13)}.modal{background:rgba(0,0,0,.74)}.eyebrow{color:#91bd99}.delta,.chart-note{color:#8e9a92}.chart-legend{display:flex;gap:14px;flex-wrap:wrap;margin:0 0 10px;color:var(--muted);font-size:11px}.chart-dot{width:9px;height:9px;border-radius:3px;display:inline-block}.chart-legend span{display:inline-flex;align-items:center;gap:6px}.planner-grid{display:grid;gap:14px}.planner-card{background:#0e1511;border:1px solid var(--line);border-radius:16px;padding:18px}.planner-card h3{margin:0 0 8px;font-size:15px}.planner-kicker{font-size:11px;color:var(--muted);line-height:1.55}.planner-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.month-picker{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.month-picker select,.month-picker input{background:#151e18;color:var(--ink);border:1px solid var(--line);border-radius:9px;padding:9px 10px}.income-row,.goal-row{display:grid;grid-template-columns:1.15fr .9fr 1.25fr 42px;gap:9px;align-items:end;padding:9px 0;border-bottom:1px solid var(--line)}.income-row label,.goal-row label{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}.income-row input,.income-row select,.goal-row input,.goal-row select{width:100%;margin-top:6px;padding:9px;border:1px solid var(--line);border-radius:9px;background:#151e18;color:var(--ink)}.planner-total{display:flex;justify-content:space-between;align-items:center;padding-top:14px;margin-top:12px;border-top:1px solid var(--line)}.planner-total strong{font-size:23px}.planner-balance{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}.balance-box{padding:14px;border:1px solid var(--line);border-radius:13px;background:#121a15}.balance-box strong{display:block;font-size:22px;margin-top:5px}.allocation-note{font-size:11px;color:var(--muted);margin-top:10px}.delete-btn{border:1px solid #472725;background:#271512;color:#e08b84;border-radius:8px;height:36px;width:36px}.small-action{border:1px solid var(--line);background:#151e18;color:var(--ink);padding:8px 11px;border-radius:9px}.status-cell{min-width:112px}.planner-message{font-size:11px;color:#91bd99;margin-top:8px;min-height:16px}.planner-message.error{color:#e27b73}.alloc-input{width:72px!important}.alloc-input:focus,.income-row input:focus,.income-row select:focus,.goal-row input:focus,.goal-row select:focus,.month-picker input:focus,.month-picker select:focus{outline:2px solid rgba(143,189,152,.35);outline-offset:1px}
-@media(max-width:760px){.planner-balance{grid-template-columns:1fr}.income-row,.goal-row{grid-template-columns:1fr 1fr}.income-row label:nth-child(3),.goal-row label:nth-child(3){grid-column:1/-1}.planner-head{display:block}.month-picker{margin-top:12px}}
+.app { display: flex; min-height: 100vh; }
+.side { width: 260px; background: #ffffff; border-right: 1px solid var(--line); padding: 24px 16px; position: fixed; inset: 0 auto 0 0; z-index: 30; display: flex; flex-direction: column; }
+.brand { font-weight: 800; font-size: 14px; letter-spacing: 0.05em; color: var(--ink); padding: 8px 12px 24px; border-bottom: 1px solid var(--line); margin-bottom: 16px; }
+.brand small { display: block; color: var(--muted); font-size: 11px; font-weight: 500; margin-top: 4px; }
+.nav { display: flex; flex-direction: column; gap: 4px; }
+.nav button { border: 0; background: transparent; text-align: left; padding: 10px 14px; border-radius: 10px; font-size: 13.5px; font-weight: 500; color: var(--muted); display: flex; align-items: center; gap: 10px; }
+.nav button:hover { background: #f1f5f9; color: var(--ink); }
+.nav button.active { background: var(--indigo-soft); color: var(--indigo); font-weight: 600; }
+
+.main { margin-left: 260px; width: calc(100% - 260px); padding: 32px 40px 80px; max-width: 1440px; }
+.top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; }
+.title h1 { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); }
+.title p { margin-top: 4px; font-size: 13px; color: var(--muted); }
+.actions { display: flex; gap: 10px; }
+.btn { border: 1px solid var(--line); background: #fff; padding: 9px 16px; border-radius: 10px; font-size: 13px; font-weight: 600; box-shadow: var(--shadow-sm); display: inline-flex; align-items: center; gap: 6px; }
+.btn:hover { background: #f8fafc; border-color: var(--line-strong); }
+.btn.primary { background: var(--indigo); color: #fff; border-color: var(--indigo); }
+.btn.primary:hover { background: #4338ca; }
+
+.grid { display: grid; gap: 18px; }
+.cards { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+.card, .section { background: var(--panel); border: 1px solid var(--line); border-radius: var(--r); box-shadow: var(--shadow-sm); }
+.card { padding: 20px; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+.card:hover { box-shadow: var(--shadow-md); }
+.eyebrow { font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.metric { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); margin-top: 6px; }
+.delta { font-size: 12px; color: var(--muted); margin-top: 6px; }
+
+.section { padding: 24px; margin-bottom: 20px; }
+.section-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+.section h2 { font-size: 16px; font-weight: 700; letter-spacing: -0.01em; }
+.periods { display: flex; background: #f1f5f9; padding: 3px; border-radius: 10px; gap: 2px; }
+.periods button { border: 0; background: transparent; padding: 6px 12px; border-radius: 8px; font-size: 12px; font-weight: 500; color: var(--muted); }
+.periods button.active { background: #fff; color: var(--ink); font-weight: 600; box-shadow: var(--shadow-sm); }
+
+.filters { display: flex; gap: 8px; flex-wrap: wrap; }
+.filters select, .filters input { border: 1px solid var(--line); background: #fff; border-radius: 8px; padding: 8px 12px; font-size: 13px; }
+.chartwrap { height: 310px; position: relative; }
+.chartwrap canvas { width: 100%; height: 100%; }
+.two { grid-template-columns: 1.55fr 1fr; }
+.three { grid-template-columns: repeat(3, 1fr); }
+
+.hero { background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%); color: var(--ink); border: 1px solid #bbf7d0; padding: 28px; border-radius: var(--r); display: flex; justify-content: space-between; gap: 24px; box-shadow: var(--shadow-sm); }
+.hero .big { font-size: 32px; font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; margin-top: 4px; color: #065f46; }
+.hero p { color: var(--muted); font-size: 13.5px; max-width: 580px; margin-top: 8px; }
+.mini { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+.mini div { border: 1px solid #bbf7d0; padding: 6px 12px; border-radius: 8px; font-size: 12px; color: #047857; background: #ffffff; font-weight: 500; }
+
+.chart-legend { display: flex; gap: 14px; flex-wrap: wrap; margin: 0 0 10px; color: var(--muted); font-size: 11px; }
+.chart-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.chart-dot { width: 9px; height: 9px; border-radius: 3px; display: inline-block; }
+.chart-note { font-size: 11.5px; color: var(--muted); margin-top: 10px; line-height: 1.4; }
+.catbar { display: grid; grid-template-columns: 120px 1fr 90px; gap: 12px; align-items: center; margin: 12px 0; font-size: 13px; }
+.bar { height: 8px; background: #f1f5f9; border-radius: 99px; overflow: hidden; }
+.bar i { display: block; height: 100%; background: var(--indigo); border-radius: 99px; }
+
+/* Monthly Planner System */
+.planner-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 20px; }
+.planner-card { background: #fff; border: 1px solid var(--line); border-radius: var(--r); padding: 22px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 14px; }
+.planner-head { display: flex; justify-content: space-between; align-items: flex-start; }
+.planner-head h3 { font-size: 15px; font-weight: 700; color: var(--ink); }
+.planner-kicker { font-size: 12px; color: var(--muted); margin-top: 2px; max-width: 460px; }
+.small-action { border: 1px dashed var(--line-strong); background: #f8fafc; padding: 6px 12px; border-radius: 8px; font-size: 12px; font-weight: 600; color: var(--ink); }
+.small-action:hover { background: #f1f5f9; border-color: var(--muted); }
+
+.month-picker { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.month-picker select, .month-picker input { border: 1px solid var(--line); background: #fff; border-radius: 8px; padding: 8px 12px; font-size: 13px; font-weight: 500; }
+
+.income-row { display: grid; grid-template-columns: 1.2fr 1fr 1.5fr 36px; gap: 10px; align-items: flex-end; margin-bottom: 12px; background: #f8fafc; padding: 12px; border-radius: 10px; border: 1px solid var(--line); }
+.income-row label, .goal-row label { font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; display: flex; flex-direction: column; gap: 4px; }
+.income-row input, .income-row select, .goal-row input, .goal-row select { width: 100%; border: 1px solid var(--line); background: #fff; border-radius: 8px; padding: 8px 10px; font-size: 13px; }
+.goal-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 10px; }
+.delete-btn { width: 32px; height: 32px; border: 0; background: var(--red-soft); color: var(--red); border-radius: 8px; font-size: 16px; font-weight: bold; display: flex; align-items: center; justify-content: center; }
+.delete-btn:hover { background: var(--red); color: #fff; }
+
+.planner-total { display: flex; justify-content: space-between; align-items: center; padding-top: 14px; border-top: 1px dashed var(--line); font-size: 14px; font-weight: 600; }
+.planner-total strong { font-size: 20px; color: var(--green); }
+.planner-balance { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 14px; }
+.balance-box { background: #f8fafc; border: 1px solid var(--line); border-radius: 10px; padding: 12px; }
+.balance-box strong { display: block; font-size: 18px; font-weight: 700; color: var(--ink); margin-top: 4px; }
+.allocation-note { font-size: 11.5px; color: var(--muted); margin-top: 8px; line-height: 1.4; }
+
+/* Tables */
+.table { width: 100%; border-collapse: separate; border-spacing: 0; }
+.table th { background: #f8fafc; padding: 10px 12px; font-size: 11px; font-weight: 600; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--line); text-align: left; }
+.table td { padding: 12px; border-bottom: 1px solid var(--line); font-size: 13px; vertical-align: middle; }
+.table th.right, .table td.right { text-align: right; }
+.pct-input { width: 60px; border: 1px solid var(--line); border-radius: 6px; padding: 4px 6px; font-weight: 600; text-align: center; }
+
+/* Progress meters & status */
+.util-meter { height: 6px; background: #e2e8f0; border-radius: 99px; margin-top: 6px; overflow: hidden; }
+.util-meter i { display: block; height: 100%; border-radius: 99px; }
+.util-meter.ok i { background: var(--green); }
+.util-meter.watch i { background: var(--warn); }
+.util-meter.over i { background: var(--red); }
+.alarm { padding: 3px 8px; border-radius: 6px; font-size: 10.5px; font-weight: 700; text-transform: uppercase; display: inline-block; }
+.alarm.ok { background: var(--green-soft); color: var(--green); }
+.alarm.watch { background: var(--warn-soft); color: var(--warn); }
+.alarm.over { background: var(--red-soft); color: var(--red); }
+.pill { display: inline-flex; padding: 3px 8px; border-radius: 999px; font-size: 11px; font-weight: 600; background: #f1f5f9; color: var(--muted); }
+.pill.green { background: var(--green-soft); color: var(--green); }
+.pill.red { background: var(--red-soft); color: var(--red); }
+.row-over { background: #fff5f5; }
+.row-watch { background: #fffdf5; }
+
+/* Goals & Portfolio */
+.goal-progress { height: 8px; background: #f1f5f9; border-radius: 99px; overflow: hidden; }
+.goal-progress i { display: block; height: 100%; background: var(--green); border-radius: 99px; }
+.invest-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 14px; }
+.invest-card { border: 1px solid var(--line); border-radius: 12px; padding: 18px; background: #fff; box-shadow: var(--shadow-sm); }
+.invest-card .amount { font-size: 22px; font-weight: 700; margin-top: 6px; color: var(--ink); }
+
+/* Modals & Helpers */
+.modal { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.4); backdrop-filter: blur(4px); display: none; align-items: center; justify-content: center; z-index: 100; }
+.modal.open { display: flex; }
+.modalbox { background: #fff; border-radius: 16px; width: min(520px, 94vw); padding: 24px; box-shadow: var(--shadow-lg); }
+.form { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.form label { font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; }
+.form input, .form select { width: 100%; margin-top: 5px; border: 1px solid var(--line); padding: 9px 12px; border-radius: 8px; font-size: 13px; }
+.form .full { grid-column: 1/-1; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0; }
+.empty { padding: 30px; text-align: center; color: var(--muted); font-size: 13px; }
+.notice { background: #f0f9ff; border: 1px solid #bae6fd; color: #0369a1; padding: 12px 16px; border-radius: 10px; font-size: 12.5px; margin-bottom: 16px; }
+.planner-message { font-size: 12px; font-weight: 600; margin-top: 8px; color: var(--green); }
+.planner-message.error { color: var(--red); }
+.hidden { display: none !important; }
+
+@media(max-width: 1024px) {
+  .planner-grid, .two { grid-template-columns: 1fr; }
+  .cards { grid-template-columns: repeat(3, 1fr); }
+  .invest-grid { grid-template-columns: repeat(2, 1fr); }
+  .side { width: 72px; padding: 16px 8px; }
+  .brand { font-size: 0; border: 0; text-align: center; }
+  .brand:after { content: "TRR"; font-size: 15px; font-weight: 800; }
+  .brand small, .nav button span { display: none; }
+  .main { margin-left: 72px; width: calc(100% - 72px); padding: 20px; }
+}
+
+@media(max-width: 640px) {
+  .cards, .three, .planner-balance, .invest-grid, .goal-row { grid-template-columns: 1fr; }
+  .hero { flex-direction: column; }
+  .income-row { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
@@ -87,32 +233,9 @@ body{background:var(--bg);color:var(--ink)}.side{background:#070c09;border-right
  <div class="section"><div class="section-head"><h2>Transactions</h2><div class="filters"><input id="searchTx" placeholder="Search"><select id="catTx"><option value="">All categories</option><option>Essentials</option><option>Lifestyle</option><option>Investments</option><option>Debt / Savings</option><option>Donation</option><option>Goals</option><option>Income</option><option>Transfer</option></select></div></div><div style="overflow:auto"><table class="table"><thead><tr><th>Date</th><th>Description</th><th>Category</th><th class="right">Amount</th><th>Notes</th><th></th></tr></thead><tbody id="txBody"></tbody></table></div></div>
 </section>
 
-<section id="budget" class="hidden"><div class="hero"><div><div class="eyebrow">MAIN BUDGET ENGINE</div><h2>Monthly Planner</h2><p>Set up the month once. Add salary and every other income source, record Family/Parents and specific goal money, then let the remaining income drive the monthly budget.</p></div><div class="month-picker"><select id="budgetMonth"></select><input id="newMonthInput" type="month"><button class="btn primary" id="newMonthBtn" type="button">+ New month</button><button class="btn" id="saveMonthBtn" type="button">Save month</button><button class="btn" id="deleteMonthBtn" type="button">Delete month</button></div></div><div id="plannerMessage" class="planner-message" role="status" aria-live="polite"></div><br><div class="notice"><b>Editable every month:</b> choose an existing month or create a new month, then enter income, Family/Parents, goal money and allocation percentages. This page is the <b>source of truth for monthly budget allocation</b>. Income can be added on the 1st and again mid-month. Every change recalculates the remaining budget and the Budget vs Actual status.</div><div class="planner-grid"><div class="planner-card"><div class="planner-head"><div><h3>🔷 1. Income Sources</h3><div class="planner-kicker">Select a source, enter the INR amount and add an optional note. Add another row whenever a new income source arrives.</div></div><button class="small-action" id="addIncomeRow" type="button">+ Add income</button></div><div id="incomeRows" style="margin-top:12px"></div><div class="planner-total"><span>Total Income</span><strong id="setupIncomeTotal">₹0</strong></div></div><div class="planner-card"><div class="planner-head"><div><h3>🏠 2. Fixed Expense + Goal Money</h3><div class="planner-kicker">Home/Family and specific goal money are committed first. Only the remainder is allocated to monthly categories.</div></div></div><div class="goal-row" style="border-bottom:0"><label>Home / Family (Fixed Spend)<input id="homeInput" type="number" min="0" step="1" placeholder="0"></label><label>Goal Amount<input id="goalInput" type="number" min="0" step="1" placeholder="0"></label><label>Goal Category<select id="goalCategoryInput"><option>MacBook Air M5</option><option>Bike</option><option>Travel</option><option>Education</option><option>Business</option><option>Investment</option><option>Debt Clearance</option><option>Custom Goal</option></select></label><div></div></div><label style="display:block;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:8px">Notes<input id="goalNotesInput" placeholder="e.g. MacBook fund / planned purchase"></label><div class="planner-balance"><div class="balance-box"><span class="eyebrow">Total income</span><strong id="plannerIncome">₹0</strong></div><div class="balance-box"><span class="eyebrow">Family + goals</span><strong id="plannerCommitted">₹0</strong></div><div class="balance-box"><span class="eyebrow">Remaining for budget</span><strong id="remainingIncome">₹0</strong></div></div><div class="allocation-note">Formula: Total Income − Home/Family − Specific Goal = Remaining Income for budget allocation.</div></div><div class="planner-card"><div class="planner-head"><div><h3>💸 3. Budget Allocation from Remaining Income</h3><div class="planner-kicker">Edit the percentage allocation. Budgeted ₹ is calculated automatically from the remaining income. Actual spending comes directly from transactions.</div></div><div style="display:flex;gap:8px;align-items:center"><button class="small-action" id="resetAllocBtn" type="button">Reset 14/10/59/15/2</button><span class="pill green" id="allocationTotal">100%</span></div></div><div style="overflow:auto;margin-top:12px"><table class="table setup-table"><thead><tr><th>Category</th><th>% Allocation</th><th>Budgeted ₹</th><th>Spent Amount</th><th>Spent On</th></tr></thead><tbody id="allocationBody"></tbody><tfoot><tr><th>TOTAL</th><th id="allocPctFoot">100%</th><th id="allocBudgetFoot">₹0</th><th id="allocSpentFoot">₹0</th><th></th></tr></table></div><div class="allocation-note">Default allocation: Essentials 14% · Lifestyle 10% · Investments 59% · Debt/Savings 15% · Donation 2%.</div></div><div class="planner-card"><div class="planner-head"><div><h3>📊 4. Budget vs Actual Summary</h3><div class="planner-kicker">Green = within plan · Amber = nearing limit · Red = overspent.</div></div><span class="pill green" id="budgetHealthPill">On track</span></div><div style="overflow:auto;margin-top:12px"><table class="table"><thead><tr><th>Category</th><th>Budgeted ₹</th><th>Actual Spent ₹ (auto)</th><th>Remaining ₹</th><th>Status</th></tr></thead><tbody id="summaryBody"></tbody><tfoot><tr><th>TOTAL</th><th id="sumBudget">₹0</th><th id="sumActual">₹0</th><th id="sumRemain">₹0</th><th id="sumStatus"></th></tr></tfoot></table></div></div></div></section>
+<section id="budget" class="hidden"><div class="hero"><div><div class="eyebrow">MAIN BUDGET ENGINE</div><h2 style="font-size:22px;margin-top:4px;">Monthly Planner</h2><p>Set up the month once. Add salary and every other income source, record Family/Parents and specific goal money, then let the remaining income drive the monthly budget.</p></div><div class="month-picker"><select id="budgetMonth"></select><input id="newMonthInput" type="month"><button class="btn primary" id="newMonthBtn" type="button">+ New month</button><button class="btn" id="saveMonthBtn" type="button">Save month</button><button class="btn" id="deleteMonthBtn" type="button">Delete month</button></div></div><div id="plannerMessage" class="planner-message" role="status" aria-live="polite"></div><br><div class="notice"><b>Editable every month:</b> choose an existing month or create a new month, then enter income, Family/Parents, goal money and allocation percentages. This page is the <b>source of truth for monthly budget allocation</b>. Income can be added on the 1st and again mid-month. Every change recalculates the remaining budget and the Budget vs Actual status.</div><div class="planner-grid"><div class="planner-card"><div class="planner-head"><div><h3>🔷 1. Income Sources</h3><div class="planner-kicker">Select a source, enter the INR amount and add an optional note. Add another row whenever a new income source arrives.</div></div><button class="small-action" id="addIncomeRow" type="button">+ Add income</button></div><div id="incomeRows" style="margin-top:12px"></div><div class="planner-total"><span>Total Income</span><strong id="setupIncomeTotal">₹0</strong></div></div><div class="planner-card"><div class="planner-head"><div><h3>🏠 2. Fixed Expense + Goal Money</h3><div class="planner-kicker">Home/Family and specific goal money are committed first. Only the remainder is allocated to monthly categories.</div></div></div><div class="goal-row" style="border-bottom:0"><label>Home / Family (Fixed Spend)<input id="homeInput" type="number" min="0" step="1" placeholder="0"></label><label>Goal Contribution This Month<input id="goalInput" type="number" min="0" step="1" placeholder="0"></label><label>Goal Category<select id="goalCategoryInput"><option>MacBook Air M5</option><option>Bike</option><option>Travel</option><option>Education</option><option>Business</option><option>Investment</option><option>Debt Clearance</option><option>Custom Goal</option></select></label><div></div></div><div id="customGoalFields" class="goal-row" style="display:none;border-bottom:0"><label>Custom Goal Name<input id="customGoalNameInput" placeholder="e.g. Wedding, Camera, Home Down Payment"></label><label>Goal Target Amount (₹)<input id="customGoalTargetInput" type="number" min="0" step="1" placeholder="Optional"></label><div></div><div></div></div><label style="display:block;font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;margin-top:12px">Goal Notes<input id="goalNotesInput" placeholder="e.g. planned purchase / target reason" style="width:100%;margin-top:4px;border:1px solid var(--line);border-radius:8px;padding:8px 10px"></label><div class="planner-balance"><div class="balance-box"><span class="eyebrow">Total income</span><strong id="plannerIncome">₹0</strong></div><div class="balance-box"><span class="eyebrow">Family + goals</span><strong id="plannerCommitted">₹0</strong></div><div class="balance-box"><span class="eyebrow">Remaining for budget</span><strong id="remainingIncome">₹0</strong></div></div><div class="allocation-note">Formula: Total Income − Home/Family − Specific Goal = Remaining Income for budget allocation.</div></div><div class="planner-card"><div class="planner-head"><div><h3>💸 3. Budget Allocation from Remaining Income</h3><div class="planner-kicker">Edit the percentage allocation. Budgeted ₹ is calculated automatically from the remaining income. Actual spending comes directly from transactions.</div></div><div style="display:flex;gap:8px;align-items:center"><button class="small-action" id="resetAllocBtn" type="button">Reset 14/10/59/15/2</button><span class="pill green" id="allocationTotal">100%</span></div></div><div style="overflow:auto;margin-top:12px"><table class="table setup-table"><thead><tr><th>Category</th><th>% Allocation</th><th>Budgeted ₹</th><th>Spent Amount</th><th>Spent On</th></tr></thead><tbody id="allocationBody"></tbody><tfoot><tr><th>TOTAL</th><th id="allocPctFoot">100%</th><th id="allocBudgetFoot">₹0</th><th id="allocSpentFoot">₹0</th><th></th></tr></table></div><div class="allocation-note">Default allocation: Essentials 14% · Lifestyle 10% · Investments 59% · Debt/Savings 15% · Donation 2%.</div></div><div class="planner-card"><div class="planner-head"><div><h3>📊 4. Budget vs Actual Summary</h3><div class="planner-kicker">Green = within plan · Amber = nearing limit · Red = overspent.</div></div><span class="pill green" id="budgetHealthPill">On track</span></div><div style="overflow:auto;margin-top:12px"><table class="table"><thead><tr><th>Category</th><th>Budgeted ₹</th><th>Actual Spent ₹ (auto)</th><th>Remaining ₹</th><th>Status</th></tr></thead><tbody id="summaryBody"></tbody><tfoot><tr><th>TOTAL</th><th id="sumBudget">₹0</th><th id="sumActual">₹0</th><th id="sumRemain">₹0</th><th id="sumStatus"></th></tr></tfoot></table></div></div></div></section>
 
-<section id="goals" class="hidden">
-  <div class="section">
-    <div class="section-head"><div><h2>MacBook Air M5 Goal</h2><div class="eyebrow">Current goal position</div></div><span class="pill green">In Progress</span></div>
-    <div class="grid two">
-      <div>
-        <div class="eyebrow">Saved so far</div>
-        <div class="metric">₹76,500</div>
-        <div class="goal-progress" style="margin-top:14px"><i style="width:52.76%"></i></div>
-        <div class="delta">52.76% of ₹1,45,000 target</div>
-      </div>
-      <div>
-        <div class="eyebrow">Still to save</div>
-        <div class="metric">₹68,500</div>
-        <div class="delta">Target: ₹1,45,000 · Laptop: Apple MacBook Air M5</div>
-      </div>
-    </div>
-    <p class="delta" style="margin-top:18px">The ₹76,500 goal balance is tracked separately from general cash savings. General savings currently remain ₹0.</p>
-  </div><br>
-  <div class="grid three">
-    <div class="section"><h2>Emergency Fund</h2><div class="metric">₹0</div><p class="delta">No accumulated savings currently recorded. Future 3 / 6 / 9 / 12-month targets can be planned here.</p></div>
-    <div class="section"><h2>Completed Goals</h2><div class="metric">0</div><p class="delta">Completed goals remain in financial history when achieved.</p></div>
-    <div class="section"><h2>Goal Principle</h2><div class="metric">Save → Buy → Achieve</div><p class="delta">Goal money is not treated as ordinary lifestyle spending.</p></div>
-  </div>
-</section>
+<section id="goals" class="hidden"><div class="section"><div class="section-head"><div><h2>Goals</h2><div class="eyebrow">Your overall goal tracker</div></div><span class="pill green">Linked to Monthly Planner</span></div><p class="delta">Every goal contribution entered in Monthly Planner is grouped here by goal. Completed goals can be marked complete and then disappear from the active dashboard view while remaining in history.</p><div id="goalsGrid" class="grid three" style="margin-top:16px"></div></div><br><div class="section"><div class="section-head"><div><h2>Goal Tracking Logic</h2><div class="eyebrow">One connected flow</div></div></div><div class="grid three"><div><div class="eyebrow">1 · Planned</div><div class="metric" style="font-size:20px">Goal contribution</div><p class="delta">Set the amount for the selected month.</p></div><div><div class="eyebrow">2 · Accumulated</div><div class="metric" style="font-size:20px">Overall progress</div><p class="delta">Monthly contributions are added to the goal's running balance.</p></div><div><div class="eyebrow">3 · Achieved</div><div class="metric" style="font-size:20px">Goal completed ✓</div><p class="delta">Completed goals remain in history rather than cluttering the active dashboard.</p></div></div></div></section>
 
 <section id="investments" class="hidden">
   <div class="section">
@@ -131,18 +254,18 @@ body{background:var(--bg);color:var(--ink)}.side{background:#070c09;border-right
   </div>
 </section>
 
-<section id="networth" class="hidden"><div class="section"><h2>Net worth</h2><p>Assets minus liabilities. Add account balances, investments, property, vehicles, loans and cards as the product evolves.</p><div class="grid three"><div class="card"><div class="eyebrow">Assets</div><div class="metric">₹—</div><div class="delta">Enter current values</div></div><div class="card"><div class="eyebrow">Liabilities</div><div class="metric">₹—</div><div class="delta">Enter debts</div></div><div class="card"><div class="eyebrow">Net worth</div><div class="metric">₹—</div><div class="delta">Automatically calculated</div></div></div></div></section>
+<section id="networth" class="hidden"><div class="section"><h2>Net worth</h2><p class="delta">Assets minus liabilities. Add account balances, investments, property, vehicles, loans and cards as the product evolves.</p><br><div class="grid three"><div class="card"><div class="eyebrow">Assets</div><div class="metric">₹—</div><div class="delta">Enter current values</div></div><div class="card"><div class="eyebrow">Liabilities</div><div class="metric">₹—</div><div class="delta">Enter debts</div></div><div class="card"><div class="eyebrow">Net worth</div><div class="metric">₹—</div><div class="delta">Automatically calculated</div></div></div></div></section>
 
-<section id="fire" class="hidden"><div class="section"><h2>FIRE planner</h2><p>Illustrative default: ₹4L/month desired lifestyle and a 4% withdrawal assumption.</p><div class="grid three"><div class="card"><div class="eyebrow">Lifestyle</div><div class="metric">₹4L / mo</div></div><div class="card"><div class="eyebrow">Illustrative corpus</div><div class="metric">₹12Cr</div></div><div class="card"><div class="eyebrow">Status</div><div class="metric">Plan it</div></div></div><p class="delta">Financial projections are estimates based on assumptions and historical information. Actual results will vary. This tracker is not financial advice.</p></div></section>
+<section id="fire" class="hidden"><div class="section"><h2>FIRE planner</h2><p class="delta">Illustrative default: ₹4L/month desired lifestyle and a 4% withdrawal assumption.</p><br><div class="grid three"><div class="card"><div class="eyebrow">Lifestyle</div><div class="metric">₹4L / mo</div></div><div class="card"><div class="eyebrow">Illustrative corpus</div><div class="metric">₹12Cr</div></div><div class="card"><div class="eyebrow">Status</div><div class="metric">Plan it</div></div></div><p class="chart-note" style="margin-top:16px;">Financial projections are estimates based on assumptions and historical information. Actual results will vary. This tracker is not financial advice.</p></div></section>
 
-<section id="wealth" class="hidden"><div class="section"><h2>Wealth Journey</h2><p>FIRE and Dream Wealth remain separate concepts.</p><div class="grid three"><div class="card"><div class="eyebrow">Dream Wealth floor</div><div class="metric">₹50Cr</div></div><div class="card"><div class="eyebrow">Midpoint target</div><div class="metric">₹65Cr</div></div><div class="card"><div class="eyebrow">Upper milestone</div><div class="metric">₹80Cr</div></div></div><br><div class="hero"><div><div class="big" style="font-size:28px">₹1Cr → ₹5Cr → ₹10Cr → FIRE → ₹25Cr → ₹50Cr → ₹65Cr → ₹80Cr</div><p>Targets and milestones, not guaranteed outcomes.</p></div></div></div></section>
+<section id="wealth" class="hidden"><div class="section"><h2>Wealth Journey</h2><p class="delta">FIRE and Dream Wealth remain separate concepts.</p><br><div class="grid three"><div class="card"><div class="eyebrow">Dream Wealth floor</div><div class="metric">₹50Cr</div></div><div class="card"><div class="eyebrow">Midpoint target</div><div class="metric">₹65Cr</div></div><div class="card"><div class="eyebrow">Upper milestone</div><div class="metric">₹80Cr</div></div></div><br><div class="hero"><div><div class="big" style="font-size:22px">₹1Cr → ₹5Cr → ₹10Cr → FIRE → ₹25Cr → ₹50Cr → ₹65Cr → ₹80Cr</div><p>Targets and milestones, not guaranteed outcomes.</p></div></div></div></section>
 </main></div>
 
 <div class="modal" id="modal"><div class="modalbox"><div class="section-head"><h2>Add transaction</h2><button class="btn" id="closeModal">Close</button></div>
 <form class="form" id="txForm">
 <label>Date<input required type="date" name="date"></label><label>Amount (₹)<input required type="number" min="0" step="1" name="amount"></label>
 <label>Description<input required name="desc"></label><label>Category<select name="cat"><option>Essentials</option><option>Lifestyle</option><option>Investments</option><option>Debt / Savings</option><option>Donation</option><option>Goals</option><option>Income</option><option>Transfer</option></select></label>
-<label class="full">Notes<input name="notes"></label><div class="full"><button class="btn primary" type="submit">Save transaction</button></div>
+<label class="full">Notes<input name="notes"></label><div class="full"><button class="btn primary" type="submit" style="width:100%;justify-content:center;margin-top:8px">Save transaction</button></div>
 </form></div></div>
 
 <script>
@@ -157,7 +280,6 @@ state.monthly=(state.monthly||[]).map(m=>({...m,alloc:{...defaultAlloc,...(m.all
 state.monthly.forEach(m=>{
   m.incomes=Array.isArray(m.incomes)?m.incomes:[{source:'Salary',amount:+m.income||0,notes:m.key<'2026-09'?'Historical imported income':''}];
   m.home=+m.home||0;
-  // Historical MacBook money is represented by the current goal opening balance, not re-counted as monthly goal spending.
   m.goal=0;
   m.goalName='MacBook Air M5';
   m.goalReferenceTotal=145000;
@@ -166,6 +288,9 @@ state.monthly.forEach(m=>{
 });
 state.macbookGoal={name:'MacBook Air M5',target:145000,saved:76500,remaining:68500,status:'In Progress'};
 state.savings={actual:0,note:'General cash savings currently ₹0; MacBook goal balance is tracked separately.'};
+state.goalTargets=state.goalTargets||{'MacBook Air M5':145000};
+state.goalOpeningBalances=state.goalOpeningBalances||{'MacBook Air M5':76500};
+state.completedGoals=state.completedGoals||{};
 state.transactions=state.transactions.filter(x=>!(String(x.category||'').toLowerCase()==='goals' && /mac ?air|macbook|laptop/i.test(String(x.description||'')+' '+String(x.notes||''))));
 function save(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));return true}catch(e){return false}}
 function monthLabel(k){return new Date(k+'-01T00:00:00').toLocaleString('en-IN',{month:'long',year:'numeric'})}
@@ -215,24 +340,24 @@ function drawCanvas(canvas, labels, series, opts={}){
  const w=r.width,h=r.height; c.clearRect(0,0,w,h);
  const pad={l:52,r:18,t:22,b:48},pw=w-pad.l-pad.r,ph=h-pad.t-pad.b;
  const vals=series.flatMap(x=>x.values), max=Math.max(1,...vals)*1.14;
- c.font='11px system-ui'; c.textAlign='right';
+ c.font='11px -apple-system, system-ui'; c.textAlign='right';
  for(let i=0;i<5;i++){
    const y=pad.t+ph*i/4;
-   c.strokeStyle='#29342d';c.lineWidth=1;c.beginPath();c.moveTo(pad.l,y);c.lineTo(w-pad.r,y);c.stroke();
-   c.fillStyle='#87948b';c.fillText(money(max*(1-i/4)),pad.l-8,y+4);
+   c.strokeStyle='#e2e8f0';c.lineWidth=1;c.beginPath();c.moveTo(pad.l,y);c.lineTo(w-pad.r,y);c.stroke();
+   c.fillStyle='#64748b';c.fillText(money(max*(1-i/4)),pad.l-8,y+4);
  }
  const groups=Math.max(labels.length,1), groupW=pw/groups, gap=Math.min(12,groupW*.08);
  const barW=Math.max(8,Math.min(30,(groupW-gap*(series.length+1))/Math.max(series.length,1)));
- const palette=['#8fbd98','#e27b73','#d6a95c','#829bd2','#b88bc3'];
+ const palette=['#059669','#e11d48','#d97706','#4f46e5','#8b5cf6'];
  labels.forEach((lab,i)=>{
    const center=pad.l+groupW*i+groupW/2;
    series.forEach((ser,si)=>{
      const v=+(ser.values[i]||0), bh=ph*(v/max), x=center-(series.length*barW+(series.length-1)*gap)/2+si*(barW+gap), y=pad.t+ph-bh;
      c.fillStyle=palette[si%palette.length]; c.globalAlpha=si===0?.48:1;
      c.fillRect(x,y,barW,bh); c.globalAlpha=1;
-     if(v>0 && groupW>45){c.fillStyle='#aab5ad';c.font='10px system-ui';c.textAlign='center';c.fillText(money(v),x+barW/2,Math.max(pad.t+10,y-5))}
+     if(v>0 && groupW>45){c.fillStyle='#475569';c.font='10px -apple-system, system-ui';c.textAlign='center';c.fillText(money(v),x+barW/2,Math.max(pad.t+10,y-5))}
    });
-   c.fillStyle='#8a968e';c.font='11px system-ui';c.textAlign='center';
+   c.fillStyle='#64748b';c.font='11px -apple-system, system-ui';c.textAlign='center';
    c.fillText(lab,center,h-14);
  });
 }
@@ -256,19 +381,35 @@ function drawFlowChart(ms){
  const labels=ms.map(m=>m.label.replace(' 20',' '));
  drawCanvas(document.getElementById('flowChart'),labels,[{name:'Income',values:ms.map(m=>m.income)},{name:'Outflow',values:ms.map(m=>m.home+Object.values(m.cat||{}).reduce((a,b)=>a+(+b||0),0))}]);
 }
+function renderGoals(){
+ const names=new Set(['MacBook Air M5']);
+ state.monthly.forEach(m=>{if(m.goalName&&m.goalName!=='Custom Goal')names.add(m.goalName);if(m.customGoalName)names.add(m.customGoalName)});
+ const cards=[...names].map(name=>{
+   const contributions=state.monthly.filter(m=>m.goalName===name||m.customGoalName===name).reduce((a,m)=>a+(+m.goal||0),0);
+   const opening=+(state.goalOpeningBalances[name]||0);
+   const saved=opening+contributions;
+   const target=+(state.goalTargets[name]||0);
+   const complete=!!state.completedGoals[name] || (target>0&&saved>=target);
+   const pct=target?Math.min(100,saved/target*100):0;
+   return `<div class="card" style="padding:18px;opacity:${complete?.72:1}"><div class="section-head" style="margin-bottom:10px"><div><div class="eyebrow">Goal</div><h3 style="margin:4px 0 0">${esc(name)}</h3></div><span class="pill ${complete?'green':''}">${complete?'Achieved':'Active'}</span></div><div class="metric">${money(saved)}</div><div class="delta">${target?`${money(target)} target · ${pct.toFixed(1)}% complete`:'Target not set yet'}</div>${target?`<div class="goal-progress" style="margin-top:12px"><i style="width:${pct}%"></i></div>`:''}<div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap"><label style="flex:1;min-width:120px;font-size:10px;color:var(--muted);text-transform:uppercase">Target ₹<input class="goal-target-edit" data-goal="${esc(name)}" type="number" min="0" step="1" value="${target||''}" placeholder="Set target" style="width:100%;margin-top:5px;padding:8px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink)"></label><button class="small-action goal-complete-btn" data-goal="${esc(name)}" type="button">${complete?'Mark active':'Mark complete'}</button></div><div class="delta" style="margin-top:10px">Monthly contributions are linked automatically from Monthly Planner.</div></div>`;
+ }).join('');
+ document.getElementById('goalsGrid').innerHTML=cards||'<div class="empty">No goals yet. Add one from Monthly Planner.</div>';
+ document.querySelectorAll('.goal-target-edit').forEach(inp=>inp.onchange=()=>{const name=inp.dataset.goal;state.goalTargets[name]=+inp.value||0;save();renderGoals()});
+ document.querySelectorAll('.goal-complete-btn').forEach(btn=>btn.onclick=()=>{const name=btn.dataset.goal;state.completedGoals[name]=!state.completedGoals[name];save();renderGoals();renderDashboard()});
+}
 function renderDashboard(){
  const ms=selectedMonthly(), cat=sumCat(ms), income=ms.reduce((a,m)=>a+m.income,0), home=ms.reduce((a,m)=>a+m.home,0), variable=Object.values(cat).reduce((a,b)=>a+b,0);
  document.getElementById('metrics').innerHTML=[
-  ['Income',money(income),'Selected period'],['Home fixed',money(home),'Fixed spend'],['Variable outflow',money(variable),'Tracked spending only'],['MacBook goal',money(state.macbookGoal.saved),'Goal balance tracked separately'],['Investments',money(cat['Investments']),'Capital building'],['Savings + debt',money(cat['Debt / Savings']),'Safety / obligations']
+  ['Income',money(income),'Selected period'],['Home fixed',money(home),'Fixed spend'],['Variable outflow',money(variable),'Tracked spending only'],['Investments',money(cat['Investments']),'Capital building'],['Savings + debt',money(cat['Debt / Savings']),'Safety / obligations']
  ].map(x=>`<div class="card"><div class="eyebrow">${x[0]}</div><div class="metric">${x[1]}</div><div class="delta">${x[2]}</div></div>`).join('');
  drawSpendChart(ms);drawFlowChart(ms);
  const total=variable||1;
  document.getElementById('catMix').innerHTML=cats.map(c=>`<div class="catbar"><span>${c}</span><div class="bar"><i style="width:${Math.min(100,cat[c]/Math.max(...Object.values(cat),1)*100)}%"></i></div><strong class="right">${money(cat[c])}</strong></div>`).join('');
  document.getElementById('rangeLabel').textContent=activePeriod==='all'?'All history':activePeriod==='custom'?`${customFrom} → ${customTo}`:activePeriod==='fy'?'FY 2025–26':activePeriod==='month'?'Last month':`Last ${activePeriod} months`;
  const t=txs().slice().sort((a,b)=>b.date.localeCompare(a.date)).slice(0,8);
- document.getElementById('recent').innerHTML=t.map(x=>`<div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line)"><div><b>${x.desc}</b><div class="eyebrow">${x.date} · ${x.cat}</div></div><strong>${money(x.amount)}</strong></div>`).join('');
+ document.getElementById('recent').innerHTML=t.map(x=>`<div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line)"><div><b>${x.desc}</b><div class="eyebrow" style="margin-top:2px">${x.date} · ${x.cat}</div></div><strong>${money(x.amount)}</strong></div>`).join('');
  const avg=ms.length?variable/ms.length:0, last=ms[ms.length-1];
- document.getElementById('direction').innerHTML=`<p><b>${last?.label||'Current period'}</b> has ${money(last?.cat['Investments']||0)} tracked as investments and ${money(last?.cat['Debt / Savings']||0)} toward savings/debt.</p><p class="delta">This dashboard separates wealth-building flows from lifestyle spending, so your financial picture isn't reduced to one “expense” number.</p>`;
+ document.getElementById('direction').innerHTML=`<p style="font-size:13.5px"><b>${last?.label||'Current period'}</b> has ${money(last?.cat['Investments']||0)} tracked as investments and ${money(last?.cat['Debt / Savings']||0)} toward savings/debt.</p><p class="delta" style="margin-top:10px">This dashboard separates wealth-building flows from lifestyle spending, so your financial picture isn't reduced to one “expense” number.</p>`;
 }
 function renderTx(){
  const q=(document.getElementById('searchTx')?.value||'').toLowerCase(),c=document.getElementById('catTx')?.value||'';
@@ -286,17 +427,26 @@ function renderMonthlySetup(k){
  document.getElementById('goalInput').value=+m.goal||0;
  document.getElementById('goalCategoryInput').value=['MacBook Air M5','Bike','Travel','Education','Business','Investment','Debt Clearance','Custom Goal'].includes(m.goalName)?m.goalName:'Custom Goal';
  document.getElementById('goalNotesInput').value=m.goalNotes||'';
+ const isCustom=m.goalName==='Custom Goal'||(m.goalName&&!['MacBook Air M5','Bike','Travel','Education','Business','Investment','Debt Clearance'].includes(m.goalName));
+ document.getElementById('customGoalFields').style.display=isCustom?'grid':'none';
+ document.getElementById('customGoalNameInput').value=isCustom?(m.customGoalName||m.goalName||''):'';
+ document.getElementById('customGoalTargetInput').value=isCustom?(m.customGoalTarget||''):'';
  document.getElementById('incomeRows').innerHTML=m.incomes.map((r,i)=>`<div class="income-row" data-i="${i}"><label>Income Source<select class="inc-source" aria-label="Income source">${incomeSources.map(x=>`<option value="${esc(x)}" ${x===r.source?'selected':''}>${esc(x)}</option>`).join('')}</select></label><label>Amount (₹)<input class="inc-amount" type="number" min="0" step="1" inputmode="decimal" value="${+r.amount||0}" aria-label="Income amount"></label><label>Notes<input class="inc-notes" value="${esc(r.notes||'')}" aria-label="Income notes"></label><button class="delete-btn remove-income" title="Delete income row" type="button">×</button></div>`).join('')||'<div class="empty">No income rows yet. Click + Add income.</div>';
  renderPlannerValues(k,false);bindBudgetInputs();
 }
-function collectPlanner(k){const m=ensureMonth(k);if(!m)return null;m.incomes=readIncomeRows();m.income=m.incomes.reduce((a,x)=>a+(+x.amount||0),0);m.home=+document.getElementById('homeInput').value||0;m.goal=+document.getElementById('goalInput').value||0;m.goalName=document.getElementById('goalCategoryInput').value||'Custom Goal';m.goalNotes=document.getElementById('goalNotesInput').value||'';m.alloc=m.alloc||{...defaultAlloc};document.querySelectorAll('.alloc-input').forEach(inp=>{if(inp.dataset.cat)m.alloc[inp.dataset.cat]=Math.max(0,Math.min(100,Number(inp.value)||0))/100});m.budget=budgetPool(m);syncMonthActuals(m);return m}
+function collectPlanner(k){const m=ensureMonth(k);if(!m)return null;m.incomes=readIncomeRows();m.income=m.incomes.reduce((a,x)=>a+(+x.amount||0),0);m.home=+document.getElementById('homeInput').value||0;m.goal=+document.getElementById('goalInput').value||0;const selectedGoal=document.getElementById('goalCategoryInput').value||'Custom Goal';
+ m.goalName=selectedGoal==='Custom Goal'?(document.getElementById('customGoalNameInput').value.trim()||'Custom Goal'):selectedGoal;
+ m.customGoalName=selectedGoal==='Custom Goal'?(document.getElementById('customGoalNameInput').value.trim()||''):'';
+ m.customGoalTarget=selectedGoal==='Custom Goal'?(+document.getElementById('customGoalTargetInput').value||0):0;
+ m.goalNotes=document.getElementById('goalNotesInput').value||'';
+ if(m.goalName&&m.customGoalTarget)state.goalTargets[m.goalName]=m.customGoalTarget;m.alloc=m.alloc||{...defaultAlloc};document.querySelectorAll('.alloc-input').forEach(inp=>{if(inp.dataset.cat)m.alloc[inp.dataset.cat]=Math.max(0,Math.min(100,Number(inp.value)||0))/100});m.budget=budgetPool(m);syncMonthActuals(m);return m}
 function renderPlannerValues(k,doSave=true){const m=collectPlanner(k);if(!m)return;const totalPct=budgetCats.reduce((a,c)=>a+(+(m.alloc?.[c]??defaultAlloc[c])||0),0);document.getElementById('setupIncomeTotal').textContent=money(m.income);document.getElementById('plannerIncome').textContent=money(m.income);document.getElementById('plannerCommitted').textContent=money((+m.home||0)+(+m.goal||0));document.getElementById('remainingIncome').textContent=money(budgetPool(m));renderAllocation(k);if(doSave)save();bindBudgetInputs()}
 function renderAllocation(k){
  const m=ensureMonth(k);if(!m)return;const a=m.alloc||defaultAlloc,totalPct=budgetCats.reduce((x,c)=>x+(+a[c]||0),0);let totalB=0,totalA=0;
- document.getElementById('allocationBody').innerHTML=budgetCats.map(c=>{const pct=+a[c]||0,b=allocationFor(m,c),actual=categoryActual(m,c),st=statusFor(actual,b),items=categoryTransactions(m,c).map(t=>`${esc(t.desc)} · ${money(t.amount)}`).join('<br>')||'—';totalB+=b;totalA+=actual;return `<tr class="row-${st}"><td><b>${esc(c)}</b></td><td><label class="sr-only" for="alloc-${m.key}-${c.replace(/[^a-z]/gi,'')}">${c} allocation percentage</label><input id="alloc-${m.key}-${c.replace(/[^a-z]/gi,'')}" class="pct-input alloc-input" data-cat="${esc(c)}" type="number" min="0" max="100" step="1" value="${Math.round(pct*100)}"> %</td><td class="budget-cell">${money(b)}</td><td class="spent-cell">${money(actual)}</td><td class="spent-list">${items}</td></tr>`}).join('');
+ document.getElementById('allocationBody').innerHTML=budgetCats.map(c=>{const pct=+a[c]||0,b=allocationFor(m,c),actual=categoryActual(m,c),st=statusFor(actual,b),items=categoryTransactions(m,c).map(t=>`${esc(t.desc)} · ${money(t.amount)}`).join('<br>')||'—';totalB+=b;totalA+=actual;return `<tr class="row-${st}"><td><b>${esc(c)}</b></td><td><label class="sr-only" for="alloc-${m.key}-${c.replace(/[^a-z]/gi,'')}">${c} allocation percentage</label><input id="alloc-${m.key}-${c.replace(/[^a-z]/gi,'')}" class="pct-input alloc-input" data-cat="${esc(c)}" type="number" min="0" max="100" step="1" value="${Math.round(pct*100)}"> %</td><td class="budget-cell">${money(b)}</td><td class="spent-cell">${money(actual)}</td><td class="spent-list" style="font-size:12px;color:var(--muted)">${items}</td></tr>`}).join('');
  const pctLabel=Math.round(totalPct*100)+'%';document.getElementById('allocationTotal').textContent=pctLabel;document.getElementById('allocPctFoot').textContent=pctLabel;document.getElementById('allocBudgetFoot').textContent=money(totalB);document.getElementById('allocSpentFoot').textContent=money(totalA);
  const valid=Math.abs(totalPct-1)<0.00001;document.getElementById('allocationTotal').className='pill '+(valid?'green':'red');
- document.getElementById('summaryBody').innerHTML=budgetCats.map(c=>{const b=allocationFor(m,c),actual=categoryActual(m,c),rem=b-actual,st=statusFor(actual,b);return `<tr class="row-${st}"><td><b>${esc(c)}</b></td><td>${money(b)}</td><td><b>${money(actual)}</b><div class="util-meter ${st}"><i style="width:${Math.min(100,b?Math.max(0,actual/b*100):0)}%"></i></div></td><td class="${rem<0?'status over':'status ok'}">${money(rem)}</td><td class="status-cell"><span class="alarm ${st}">${st==='over'?'🚨 OVERSPENT':st==='watch'?'⚠ NEAR LIMIT':'✓ OK'}</span></td></tr>`}).join('');
+ document.getElementById('summaryBody').innerHTML=budgetCats.map(c=>{const b=allocationFor(m,c),actual=categoryActual(m,c),rem=b-actual,st=statusFor(actual,b);return `<tr class="row-${st}"><td><b>${esc(c)}</b></td><td>${money(b)}</td><td><b>${money(actual)}</b><div class="util-meter ${st}"><i style="width:${Math.min(100,b?Math.max(0,actual/b*100):0)}%"></i></div></td><td class="${rem<0?'status over':'status ok'}"><b>${money(rem)}</b></td><td class="status-cell"><span class="alarm ${st}">${st==='over'?'🚨 OVERSPENT':st==='watch'?'⚠ NEAR LIMIT':'✓ OK'}</span></td></tr>`}).join('');
  const rem=totalB-totalA,overall=statusFor(totalA,totalB);document.getElementById('sumBudget').textContent=money(totalB);document.getElementById('sumActual').textContent=money(totalA);document.getElementById('sumRemain').textContent=money(rem);document.getElementById('sumStatus').innerHTML=`<span class="alarm ${overall}">${overall==='over'?'🚨 OVERSPENT':overall==='watch'?'⚠ NEAR LIMIT':'✓ ON TRACK'}</span>`;document.getElementById('budgetHealthPill').className='pill '+(overall==='over'?'red':overall==='watch'?'':'green');document.getElementById('budgetHealthPill').textContent=overall==='over'?'Overspent':overall==='watch'?'Near limit':'On track';
  if(!valid)plannerMsg(`Allocation totals ${pctLabel}. Adjust the percentages to exactly 100% before treating the full remaining income as allocated.`,true);else plannerMsg('All allocation percentages total 100%. Edit any field and the month recalculates automatically.')
 }
@@ -311,23 +461,23 @@ function updatePlannerWithoutReplacingInputs(k){
  if(Math.abs(totalPct-1)>0.00001)plannerMsg(`Allocation totals ${pctLabel}. Make the percentages total 100%.`,true);else plannerMsg('Saved ✓');
 }
 function bindBudgetInputs(){}
-function showView(id){document.querySelectorAll('main section[id]').forEach(s=>s.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===id));const titles={dashboard:['Financial Command Center','Your money, connected.'],transactions:['Transactions','Every rupee has a record.'],budget:['Monthly Planner','Income → Family → Goals → Budget'],goals:['Goals','Save for what actually matters.'],investments:['Investments','Track what you are building.'],networth:['Net Worth','Your most important financial number.'],fire:['FIRE','Plan your freedom.'],wealth:['Wealth Journey','Build toward the life you actually want.']};document.getElementById('pageTitle').textContent=titles[id][0];document.getElementById('pageSub').textContent=titles[id][1];if(id==='dashboard')renderDashboard();if(id==='transactions')renderTx();if(id==='budget'){renderBudget();setTimeout(bindBudgetInputs,0)}}
+function showView(id){document.querySelectorAll('main section[id]').forEach(s=>s.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===id));const titles={dashboard:['Financial Command Center','Your money, connected.'],transactions:['Transactions','Every rupee has a record.'],budget:['Monthly Planner','Income → Family → Goals → Budget'],goals:['Goals','Save for what actually matters.'],investments:['Investments','Track what you are building.'],networth:['Net Worth','Your most important financial number.'],fire:['FIRE','Plan your freedom.'],wealth:['Wealth Journey','Build toward the life you actually want.']};document.getElementById('pageTitle').textContent=titles[id][0];document.getElementById('pageSub').textContent=titles[id][1];if(id==='dashboard')renderDashboard();if(id==='transactions')renderTx();if(id==='budget'){renderBudget();setTimeout(bindBudgetInputs,0)}if(id==='goals')renderGoals()}
 document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>showView(b.dataset.view));
 document.getElementById('periods').onclick=e=>{if(e.target.tagName!=='BUTTON')return;document.querySelectorAll('#periods button').forEach(b=>b.classList.remove('active'));e.target.classList.add('active');activePeriod=e.target.dataset.p;document.getElementById('customFilters').style.display=activePeriod==='custom'?'flex':'none';if(activePeriod!=='custom')renderDashboard()};
 document.getElementById('applyCustom').onclick=()=>{customFrom=document.getElementById('fromMonth').value;customTo=document.getElementById('toMonth').value;renderDashboard()};
 document.getElementById('searchTx').oninput=renderTx;document.getElementById('catTx').onchange=renderTx;
 document.getElementById('budgetMonth').onchange=e=>{const k=e.target.value;if(!k){plannerMsg('Select a month first.',true);return}renderMonthlySetup(k);plannerMsg(`Editing ${monthLabel(k)}.`)};
 document.getElementById('addIncomeRow').onclick=()=>{const k=document.getElementById('budgetMonth').value;if(!k){plannerMsg('Select a month before adding income.',true);return}const m=ensureMonth(k);m.incomes=readIncomeRows();m.incomes.push({source:'Salary',amount:0,notes:''});renderMonthlySetup(k);save();plannerMsg('New income row added. Select the source and enter the amount.');setTimeout(()=>document.querySelector('#incomeRows .income-row:last-child .inc-amount')?.focus(),0)};
-// Event delegation keeps dynamically added income rows and allocation inputs editable.
 document.getElementById('incomeRows').addEventListener('input',e=>{if(e.target.matches('.inc-amount,.inc-notes')){const k=document.getElementById('budgetMonth').value;if(k)updatePlannerWithoutReplacingInputs(k)}});
 document.getElementById('incomeRows').addEventListener('change',e=>{if(e.target.matches('.inc-source')){const k=document.getElementById('budgetMonth').value;if(k)updatePlannerWithoutReplacingInputs(k)}});
 document.getElementById('incomeRows').addEventListener('click',e=>{const b=e.target.closest('.remove-income');if(!b)return;const k=document.getElementById('budgetMonth').value;if(!k){plannerMsg('Select a month first.',true);return}const m=ensureMonth(k);m.incomes=readIncomeRows();const i=+b.closest('.income-row').dataset.i;m.incomes.splice(i,1);renderMonthlySetup(k);save();plannerMsg('Income row removed.')});
 document.getElementById('allocationBody').addEventListener('input',e=>{if(!e.target.matches('.alloc-input'))return;const k=document.getElementById('budgetMonth').value;if(k)updatePlannerWithoutReplacingInputs(k)});
 document.getElementById('allocationBody').addEventListener('change',e=>{if(!e.target.matches('.alloc-input'))return;const k=document.getElementById('budgetMonth').value;if(k)updatePlannerWithoutReplacingInputs(k)});
 ['homeInput','goalInput','goalNotesInput'].forEach(id=>document.getElementById(id).addEventListener('input',()=>{const k=document.getElementById('budgetMonth').value;if(k)updatePlannerWithoutReplacingInputs(k)}));
-document.getElementById('goalCategoryInput').addEventListener('change',()=>{const k=document.getElementById('budgetMonth').value;if(k)updatePlannerWithoutReplacingInputs(k)});
+document.getElementById('goalCategoryInput').addEventListener('change',()=>{const isCustom=document.getElementById('goalCategoryInput').value==='Custom Goal';document.getElementById('customGoalFields').style.display=isCustom?'grid':'none';const k=document.getElementById('budgetMonth').value;if(k)updatePlannerWithoutReplacingInputs(k)});
+['customGoalNameInput','customGoalTargetInput'].forEach(id=>document.getElementById(id).addEventListener('input',()=>{const k=document.getElementById('budgetMonth').value;if(k)updatePlannerWithoutReplacingInputs(k)}));
 
-document.getElementById('newMonthBtn').onclick=()=>{const d=document.getElementById('newMonthInput').value;if(!d){plannerMsg('Choose a month in the New month field first.',true);document.getElementById('newMonthInput').focus();return}if(state.monthly.some(m=>m.key===d)){document.getElementById('budgetMonth').value=d;renderMonthlySetup(d);plannerMsg(`${monthLabel(d)} already exists. It is now selected.`);return}const m=ensureMonth(d);m.incomes=[{source:'Salary',amount:0,notes:''}];m.alloc={...defaultAlloc};m.income=0;m.home=0;m.goal=0;m.goalName='MacBook Air M5';m.goalNotes='';m.budget=0;document.getElementById('budgetMonth').value=d;document.getElementById('newMonthInput').value='';renderBudget();document.getElementById('budgetMonth').value=d;renderMonthlySetup(d);save();showView('budget');plannerMsg(`${monthLabel(d)} created. Add income, Family/Parents, goals and edit allocation percentages.`)};
+document.getElementById('newMonthBtn').onclick=()=>{const d=document.getElementById('newMonthInput').value;if(!d){plannerMsg('Choose a month in the New month field first.',true);document.getElementById('newMonthInput').focus();return}if(state.monthly.some(m=>m.key===d)){document.getElementById('budgetMonth').value=d;renderMonthlySetup(d);plannerMsg(`${monthLabel(d)} already exists. It is now selected.`);return}const m=ensureMonth(d);m.incomes=[{source:'Salary',amount:0,notes:''}];m.alloc={...defaultAlloc};m.income=0;m.home=0;m.goal=0;m.goalName='MacBook Air M5';m.customGoalName='';m.customGoalTarget=0;m.goalNotes='';m.budget=0;document.getElementById('budgetMonth').value=d;document.getElementById('newMonthInput').value='';renderBudget();document.getElementById('budgetMonth').value=d;renderMonthlySetup(d);save();showView('budget');plannerMsg(`${monthLabel(d)} created. Add income, Family/Parents, goals and edit allocation percentages.`)};
 document.getElementById('resetAllocBtn').onclick=()=>{const k=document.getElementById('budgetMonth').value;if(!k){plannerMsg('Select a month first.',true);return}const m=ensureMonth(k);m.alloc={...defaultAlloc};renderMonthlySetup(k);save();plannerMsg('Default allocation restored: 14% / 10% / 59% / 15% / 2%.')};
 document.getElementById('saveMonthBtn').onclick=()=>{const k=document.getElementById('budgetMonth').value;if(!k){plannerMsg('Select a month before saving.',true);return}const m=ensureMonth(k);const inputs=[...document.querySelectorAll('.alloc-input')];m.alloc=m.alloc||{...defaultAlloc};inputs.forEach(inp=>{if(inp.dataset.cat)m.alloc[inp.dataset.cat]=Math.max(0,Math.min(100,Number(inp.value)||0))/100});const total=inputs.reduce((a,inp)=>a+(Number(inp.value)||0),0);if(Math.abs(total-100)>0.00001){plannerMsg(`Cannot finalize ${m.label}: allocation is ${Math.round(total)}%. It must total 100%.`,true);return}collectPlanner(k);save();renderAllocation(k);plannerMsg(`${m.label} saved ✓`)};
 document.getElementById('deleteMonthBtn').onclick=()=>{const k=document.getElementById('budgetMonth').value;if(!k)return;if(state.monthly.length<=1){alert('Keep at least one month in the tracker.');return}if(!confirm('Delete '+monthLabel(k)+'? This removes the month planner only; transactions for that month remain in the transaction history.'))return;state.monthly=state.monthly.filter(m=>m.key!==k);const next=state.monthly.at(-1)?.key||'';save();renderBudget();document.getElementById('budgetMonth').value=next;if(next)renderMonthlySetup(next)};
@@ -353,4 +503,5 @@ document.getElementById('exportBtn').onclick=()=>{const blob=new Blob([JSON.stri
 window.onresize=()=>{if(!document.getElementById('dashboard').classList.contains('hidden'))renderDashboard()};
 renderDashboard();
 </script>
-</body></html>
+</body>
+</html>
